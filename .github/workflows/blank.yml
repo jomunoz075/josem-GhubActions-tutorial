@@ -44,9 +44,9 @@ jobs:
       - name: Concatenate strings with separator
         uses: michpohl/action-concatenate-strings@v1.0.1
         with:
-          first: 'Hello'
-          second: 'World'
-          separator: ', '
+          first: 'dapppublicbucket'
+          second: ${{ env.DEVNAME_SUFFIX}}
+          separator: ''
           output-var-name: 'GREETINGS'
 
         
