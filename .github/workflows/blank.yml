@@ -48,5 +48,12 @@ jobs:
           second: ${{ env.DEVNAME_SUFFIX}}
           separator: ''
           output-var-name: 'GREETINGS'
+      - id: string
+        uses: ASzc/change-string-case-action@v6
+        with:
+          string: Xyzzy
+      - id: step2
+        run: echo ${{ steps.string.outputs.lowercase }}
+      
 
         
