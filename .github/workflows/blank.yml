@@ -41,19 +41,20 @@ jobs:
       - name: Use environment variables
         run: echo ${{ env.DEVNAME_SUFFIX}}
       # Runs multiple command to concatenate strings
-      - name: Concatenate strings with separator
+      - name: Concatenate_strings
+        id: concat
         uses: michpohl/action-concatenate-strings@v1.0.1
         with:
           first: 'dapppublicbucket'
           second: ${{ env.DEVNAME_SUFFIX}}
           separator: ''
-          output-var-name: 'GREETINGS'
+          output-var-name: 'DAPPPUBLICBUCKETVALUE'
       - id: string
         uses: ASzc/change-string-case-action@v6
         with:
-          string: joseGregorioMunoz
+          string: ${{ steps.concat.outputs.DAPPPUBLICBUCKETVALUE }}
       - id: step2
-        run: echo ${{ steps.string.outputs.lowercase }}
+        run: echo  ${{ steps.string.outputs.capitalized }}
       
 
         
