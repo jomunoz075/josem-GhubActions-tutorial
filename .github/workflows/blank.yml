@@ -45,16 +45,13 @@ jobs:
         with:
           string: ${{ env.DEVNAME_SUFFIX }}
       - id: step2
-        run: echo DEVNAME_SUFFIX_CAPITALIZED=${{ steps.string.outputs.capitalized }}
+        run: echo DEVNAME_SUFFIX_CAPITALIZED=${{ steps.string.outputs.capitalized }} >> $GITHUB_ENV
       # Run concatenate strings
       - name: Concatenate_strings
         id: concat
         uses: michpohl/action-concatenate-strings@v1.0.1
         with:
           first: 'dapppublicbucket'
-          second: ${{ steps.step2.outputs }}
+          second: '${{ env.DEVNAME_SUFFIX }}'
           separator: ''
           output-var-name: 'DAPPPUBLICBUCKETVALUE'
-
-
-        
