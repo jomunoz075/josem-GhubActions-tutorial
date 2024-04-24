@@ -52,6 +52,6 @@ jobs:
         uses: michpohl/action-concatenate-strings@v1.0.1
         with:
           first: 'dapppublicbucket'
-          second: '${{ env.DEVNAME_SUFFIX }}'
+          second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
           separator: ''
           output-var-name: 'DAPPPUBLICBUCKETVALUE'
