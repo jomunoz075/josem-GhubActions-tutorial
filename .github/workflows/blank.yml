@@ -51,7 +51,7 @@ jobs:
       - id: string
         uses: ASzc/change-string-case-action@v6
         with:
-          string: Xyzzy
+          string: joseGregorioMunoz
       - id: step2
         run: echo ${{ steps.string.outputs.lowercase }}
       
