@@ -55,3 +55,5 @@ jobs:
           second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
           separator: ''
           output-var-name: 'DAPPPUBLICBUCKETVALUE'
+      - name: Use environment variables
+        run: echo ${{ env.DAPPPUBLICBUCKETVALUE}}
