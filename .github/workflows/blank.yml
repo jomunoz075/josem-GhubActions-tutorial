@@ -50,6 +50,6 @@ jobs:
       run: echo "CDNDAPP_NAME=${{ format('{0}-{1}', env.APIGW, env.DEVNAME) }}" >> $GITHUB_ENV
       env:
         CDNDAPP: 'cdnDapp'
-        DEVNAME: ${{ env.DEVNAME_SUFFIX }}
+        DEVNAME: ${{ env.DEVNAME_CAPITALIZED }}
     - name: Use concatenated string
       run: echo "The apigw-devname is $APIGW_NAME"      
