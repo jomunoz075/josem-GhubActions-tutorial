@@ -8,7 +8,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Concatenate strings using format
       run: echo "FULL_PATH=${{ format('{0}/{1}.{2}', env.FOLDER, env.FILENAME, env.EXT) }}" >> $GITHUB_ENV
