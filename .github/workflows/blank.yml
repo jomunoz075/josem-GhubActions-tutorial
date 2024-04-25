@@ -19,11 +19,24 @@ jobs:
         FOLDER: 'my_folder'
         FILENAME: 'my_file'
         EXT: 'txt'
-
     - name: Use concatenated string
       run: echo "The full path is $FULL_PATH"
+
+
 # fix formats of variables
 
+    # Runs multiple command to concatenate strings
+    - id: string
+      uses: ASzc/change-string-case-action@v6
+      with:
+        string: ${{ env.DEVNAME_SUFFIX }}
+    - id: step2
+      run: |
+        echo DEVNAME_SUFFIX_CAPITALIZED=${{ steps.string.outputs.capitalized }}
+        echo ${{ env.DEVNAME_CAPITALIZED }}
+
+
+  # fix formats of variables apigw-devname
     - name: apigw-devname
       run: echo "APIGW_NAME=${{ format('{0}-{1}', env.APIGW, env.DEVNAME) }}" >> $GITHUB_ENV
       env:
@@ -31,3 +44,12 @@ jobs:
         DEVNAME: ${{ env.DEVNAME_SUFFIX }}
     - name: Use concatenated string
       run: echo "The apigw-devname is $APIGW_NAME"
+
+  # fix formats of variables apigw-devname
+    - name: cdnDappDevname
+      run: echo "CDNDAPP_NAME=${{ format('{0}-{1}', env.APIGW, env.DEVNAME) }}" >> $GITHUB_ENV
+      env:
+        CDNDAPP: 'cdnDapp'
+        DEVNAME: ${{ env.DEVNAME_SUFFIX }}
+    - name: Use concatenated string
+      run: echo "The apigw-devname is $APIGW_NAME"      
