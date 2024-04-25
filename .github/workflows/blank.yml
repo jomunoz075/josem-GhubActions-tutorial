@@ -1,116 +1,21 @@
-# This is a basic workflow to help you get started with Actions
+name: Concatenate Strings
 
-name: CI
+on: [push]
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-env:
-  DEVNAME_SUFFIX: nunu
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-      # Runs a single command to use environment variables
-      - name: Get devname for each environment
-        run: echo ${{ env.DEVNAME_SUFFIX}}
-      # Runs multiple command to concatenate strings
-      - id: string
-        uses: ASzc/change-string-case-action@v6
-        with:
-          string: ${{ env.DEVNAME_SUFFIX }}
-      - id: step2
-        run: echo DEVNAME_SUFFIX_CAPITALIZED=${{ steps.string.outputs.capitalized }}
-        # Run concatenate strings for apigw
-      - name: Concatenate_strings_apigw
-        id: concat0_apigw
-        uses: michpohl/action-concatenate-strings@v1.0.1
-        with:
-          first: 'apigw-'
-          second: '${{ env.DEVNAME_SUFFIX }}'
-          separator: ''
-          output-var-name: 'APIGWVALUE'
-      - name: Show environment variables auth
-        run: echo ${{ env.APIGWVALUE}}
-        # Run concatenate strings for cognito
-      - name: Concatenate_strings_auth
-        id: concat1_auth
-        uses: michpohl/action-concatenate-strings@v1.0.1
-        with:
-          first: 'auth-'
-          second: '${{ env.DEVNAME_SUFFIX }}'
-          separator: ''
-          output-var-name: 'AUTHVALUE'
-      - name: Show environment variables auth
-        run: echo ${{ env.AUTHVALUE}}
-        # Run concatenate strings for CDN DAPP
-      - name: Concatenate_strings_auth
-        id: concat2_cdnDapp
-        uses: michpohl/action-concatenate-strings@v1.0.1
-        with:
-          first: 'cdnDapp'
-          second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
-          separator: ''
-          output-var-name: 'CDNDAPPVALUE'
-      - name: Show environment variables cdnDapp
-        run: echo ${{ env.CDNDAPPVALUE}}
-        # Run concatenate strings for CDN STORE
-      - name: Concatenate_strings_cdnStore
-        id: concat3_cdnStore
-        uses: michpohl/action-concatenate-strings@v1.0.1
-        with:
-          first: 'cdnStore'
-          second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
-          separator: ''
-          output-var-name: 'CDNSTOREVALUE'
-      - name: Show environment variables auth
-        run: echo ${{ env.CDNSTOREVALUE}}
-        # Run concatenate strings for CDN VESTING
-      - name: Concatenate_strings_cdnVesting
-        id: concat4_cdnVesting
-        uses: michpohl/action-concatenate-strings@v1.0.1
-        with:
-          first: 'cdnVesting'
-          second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
-          separator: ''
-          output-var-name: 'CDNVESTINGVALUE'
-      - name: Show environment variables auth
-        run: echo ${{ env.CDNVESTINGVALUE}}
-        # Run concatenate string for dappPublicBucket
-      - name: Concatenate_strings_dapppublicbucket
-        id: concat5_dapppublicbucket
-        uses: michpohl/action-concatenate-strings@v1.0.1
-        with:
-          first: 'dappPublicBucket'
-          second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
-          separator: ''
-          output-var-name: 'DAPPPUBLICBUCKETVALUE'
-      - name: Use environment variables
-        run: echo ${{ env.DAPPPUBLICBUCKETVALUE }}
-        # Run concatenate string for dappPrivateBucket
-      - name: concat5_dappprivatebucket
-        id: concat6_dappprivatebucket
-        uses: michpohl/action-concatenate-strings@v1.0.1
-        with:
-          first: 'dappPrivateBucket'
-          second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
-          separator: ''
-          output-var-name: 'DAPPPRIVATEBUCKETVALUE'
-      - name: Use environment variables
-        run: echo ${{ env.DAPPPRIVATEBUCKETVALUE }}
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Concatenate strings using format
+      run: echo "FULL_PATH=${{ format('{0}/{1}.{2}', env.FOLDER, env.FILENAME, env.EXT) }}" >> $GITHUB_ENV
+      env:
+        FOLDER: 'my_folder'
+        FILENAME: 'my_file'
+        EXT: 'txt'
+
+    - name: Use concatenated string
+      run: echo "The full path is $FULL_PATH"
