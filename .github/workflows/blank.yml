@@ -45,11 +45,11 @@ jobs:
     - name: Use concatenated string
       run: echo "The apigw-devname is $APIGW_NAME"
 
-  # fix formats of variables apigw-devname
+  # fix formats of variables cdnDevname
     - name: cdnDappDevname
-      run: echo "CDNDAPP_NAME=${{ format('{0}-{1}', env.APIGW, env.DEVNAME) }}" >> $GITHUB_ENV
+      run: echo "CDNDAPP_NAME=${{ format('{0}-{1}', env.CDNDAPP, env.DEVNAME) }}" >> $GITHUB_ENV
       env:
         CDNDAPP: 'cdnDapp'
         DEVNAME: ${{ env.DEVNAME_CAPITALIZED }}
     - name: Use concatenated string
-      run: echo "The apigw-devname is $APIGW_NAME"      
+      run: echo "The apigw-devname is $APIGW_NAME"
