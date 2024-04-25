@@ -52,4 +52,4 @@ jobs:
         CDNDAPP: 'cdnDapp'
         DEVNAME: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
     - name: Use concatenated string
-      run: echo "The apigw-devname is $APIGW_NAME"
+      run: echo "The apigw-devname is $CDNDAPP_NAME"
