@@ -27,17 +27,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
       # Runs a single command to use environment variables
-      - name: Use environment variables
+      - name: Get devname for each environment
         run: echo ${{ env.DEVNAME_SUFFIX}}
       # Runs multiple command to concatenate strings
       - id: string
@@ -45,15 +36,81 @@ jobs:
         with:
           string: ${{ env.DEVNAME_SUFFIX }}
       - id: step2
-        run: echo DEVNAME_SUFFIX_CAPITALIZED=${{ steps.string.outputs.capitalized }} >> $GITHUB_ENV
-      # Run concatenate strings
-      - name: Concatenate_strings
-        id: concat
+        run: echo DEVNAME_SUFFIX_CAPITALIZED=${{ steps.string.outputs.capitalized }}
+        # Run concatenate strings for apigw
+      - name: Concatenate_strings_apigw
+        id: concat0_apigw
         uses: michpohl/action-concatenate-strings@v1.0.1
         with:
-          first: 'dapppublicbucket'
+          first: 'apigw-'
+          second: '${{ env.DEVNAME_SUFFIX }}'
+          separator: ''
+          output-var-name: 'APIGWVALUE'
+      - name: Show environment variables auth
+        run: echo ${{ env.APIGWVALUE}}
+        # Run concatenate strings for cognito
+      - name: Concatenate_strings_auth
+        id: concat1_auth
+        uses: michpohl/action-concatenate-strings@v1.0.1
+        with:
+          first: 'auth-'
+          second: '${{ env.DEVNAME_SUFFIX }}'
+          separator: ''
+          output-var-name: 'AUTHVALUE'
+      - name: Show environment variables auth
+        run: echo ${{ env.AUTHVALUE}}
+        # Run concatenate strings for CDN DAPP
+      - name: Concatenate_strings_auth
+        id: concat2_cdnDapp
+        uses: michpohl/action-concatenate-strings@v1.0.1
+        with:
+          first: 'cdnDapp'
+          second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
+          separator: ''
+          output-var-name: 'CDNDAPPVALUE'
+      - name: Show environment variables cdnDapp
+        run: echo ${{ env.CDNDAPPVALUE}}
+        # Run concatenate strings for CDN STORE
+      - name: Concatenate_strings_cdnStore
+        id: concat3_cdnStore
+        uses: michpohl/action-concatenate-strings@v1.0.1
+        with:
+          first: 'cdnStore'
+          second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
+          separator: ''
+          output-var-name: 'CDNSTOREVALUE'
+      - name: Show environment variables auth
+        run: echo ${{ env.CDNSTOREVALUE}}
+        # Run concatenate strings for CDN VESTING
+      - name: Concatenate_strings_cdnVesting
+        id: concat4_cdnVesting
+        uses: michpohl/action-concatenate-strings@v1.0.1
+        with:
+          first: 'cdnVesting'
+          second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
+          separator: ''
+          output-var-name: 'CDNVESTINGVALUE'
+      - name: Show environment variables auth
+        run: echo ${{ env.CDNVESTINGVALUE}}
+        # Run concatenate string for dappPublicBucket
+      - name: Concatenate_strings_dapppublicbucket
+        id: concat5_dapppublicbucket
+        uses: michpohl/action-concatenate-strings@v1.0.1
+        with:
+          first: 'dappPublicBucket'
           second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
           separator: ''
           output-var-name: 'DAPPPUBLICBUCKETVALUE'
       - name: Use environment variables
-        run: echo ${{ env.DAPPPUBLICBUCKETVALUE}}
+        run: echo ${{ env.DAPPPUBLICBUCKETVALUE }}
+        # Run concatenate string for dappPrivateBucket
+      - name: concat5_dappprivatebucket
+        id: concat6_dappprivatebucket
+        uses: michpohl/action-concatenate-strings@v1.0.1
+        with:
+          first: 'dappPrivateBucket'
+          second: '${{ env.DEVNAME_SUFFIX_CAPITALIZED }}'
+          separator: ''
+          output-var-name: 'DAPPPRIVATEBUCKETVALUE'
+      - name: Use environment variables
+        run: echo ${{ env.DAPPPRIVATEBUCKETVALUE }}
