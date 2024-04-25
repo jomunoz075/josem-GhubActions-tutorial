@@ -32,7 +32,7 @@ jobs:
         string: ${{ env.DEVNAME_SUFFIX }}
     - id: step2
       run: |
-        echo DEVNAME_SUFFIX_CAPITALIZED=${{ steps.string.outputs.capitalized }}
+        echo DEVNAME_SUFFIX_CAPITALIZED=${{ steps.string.outputs.capitalized }} >> $GITHUB_ENV
         echo ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
         echo "the name of the devname is capitalized: $DEVNAME_SUFFIX_CAPITALIZED"
 
