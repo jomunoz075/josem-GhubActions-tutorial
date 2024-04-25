@@ -2,6 +2,9 @@ name: Concatenate Strings
 
 on: [push]
 
+env:
+  DEVNAME_SUFFIX: nunu
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,3 +22,12 @@ jobs:
 
     - name: Use concatenated string
       run: echo "The full path is $FULL_PATH"
+# fix formats of variables
+
+    - name: apigw-devname
+      run: echo "APIGW_NAME=${{ format('{0}-{1}', env.APIGW, env.DEVNAME) }}" >> $GITHUB_ENV
+      env:
+        APIGW: 'apigw'
+        DEVNAME: ${{ env.DEVNAME_SUFFIX }}
+    - name: Use concatenated string
+      run: echo "The apigw-devname is $APIGW_NAME"
