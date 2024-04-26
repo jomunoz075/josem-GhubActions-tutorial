@@ -19,13 +19,7 @@ jobs:
       env:
         FOLDER: 'my_folder'
         FILENAME: 'my_file'
-        EXT: 'txt'
-        
-    - name: Use concatenated string
-      run: echo "The full path is $FULL_PATH"
-    - id: toLowerCase
-      run: INPUT=${{ env.UPPERCASE_VAR }}; echo "::set-output name=lowerCaseValue::${INPUT,,}"
-    - run: echo ${{ steps.toLowerCase.outputs.lowerCaseValue }}      
+        EXT: 'txt'    
 
 # fix formats of variables
     # Runs multiple command to concatenate strings
