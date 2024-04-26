@@ -4,6 +4,7 @@ on: [push]
 
 env:
   DEVNAME_SUFFIX: nunu
+  UPPERCASE_VAR: "HELLO WORLD"
 
 jobs:
   build:
@@ -19,12 +20,14 @@ jobs:
         FOLDER: 'my_folder'
         FILENAME: 'my_file'
         EXT: 'txt'
+        
     - name: Use concatenated string
       run: echo "The full path is $FULL_PATH"
-
+    - id: toLowerCase
+      run: INPUT=${{ env.UPPERCASE_VAR }}; echo "::set-output name=lowerCaseValue::${INPUT,,}"
+    - run: echo ${{ steps.toLowerCase.outputs.lowerCaseValue }}      
 
 # fix formats of variables
-
     # Runs multiple command to concatenate strings
     - id: string
       uses: ASzc/change-string-case-action@v6
