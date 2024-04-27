@@ -39,15 +39,15 @@ jobs:
       env:
         APIGW: 'apigw'
         DEVNAME: ${{ env.DEVNAME_SUFFIX }}
-    - name: Use concatenated string
+    - name: Use concatenated string apigw-devname
       run: echo "The apigw-devname is $APIGW_NAME"
 
     # fix formats of variables auth-pulumistack
     - name: auth-pulumistack
-      run: echo "AUTH_NAME=${{ format('{0}-{1}', env.APIGW, env.DEVNAME) }}" >> $GITHUB_ENV
+      run: echo "AUTH_NAME=${{ format('{0}-{1}', env.AUTH_ENV_NAME, env.NODE_ENV_NAME) }}" >> $GITHUB_ENV
       env:
-        APIGW: 'auth'
-        DEVNAME: ${{ env.DEVNAME_SUFFIX }}
+        AUTH_ENV_NAME: 'auth'
+        NODE_ENV_NAME: ${{ env.NODE_ENV }}
     - name: Use concatenated string auth-pulumistack
       run: echo "The auth-pulumistack is $AUTH_NAME"
 
