@@ -33,7 +33,6 @@ jobs:
         echo ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
         echo "the name of the devname is capitalized: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}"
 
-
   # fix formats of variables apigw-devname
     - name: apigw-devname
       run: echo "APIGW_NAME=${{ format('{0}-{1}', env.APIGW, env.DEVNAME) }}" >> $GITHUB_ENV
@@ -43,11 +42,23 @@ jobs:
     - name: Use concatenated string
       run: echo "The apigw-devname is $APIGW_NAME"
 
-  # fix formats of variables cdnDevname
+
+
+
+  # fix formats of variables cdnDappDevname
     - name: cdnDappDevname
       run: echo "CDNDAPP_NAME=${{ format('{0}{1}', env.CDNDAPP2, env.DEVNAME2) }}" >> $GITHUB_ENV
       env:
         CDNDAPP2: 'cdnDapp'
         DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
-    - name: Use concatenated string
-      run: echo "The apigw-devname is $CDNDAPP_NAME"
+    - name: Use concatenated string cdnDappDevname
+      run: echo "The cdnDappDevname is $CDNDAPP_NAME"
+
+  # fix formats of variables cdnStoreDevname
+    - name: cdnStoreDevname
+      run: echo "CDNDAPP_NAME=${{ format('{0}{1}', env.CDNSTORE, env.DEVNAME2) }}" >> $GITHUB_ENV
+      env:
+        CDNSTORE: 'cdnStore'
+        DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
+    - name: Use concatenated string cdnStoreDevname
+      run: echo "The cdnDappDevname is $CDNDAPP_NAME"
