@@ -116,30 +116,52 @@ jobs:
 
   # fix formats of variables dappPublicBucketDevname
     - name: dappPublicBucketDevname
-      if: ${{ env.MULTISTAGE == 'false' }}
-      run: echo "DAPPPUBLICBUCKET_NAME=${{ format('{0}{1}', env.DAPPPUBLICBUCKET, env.DEVNAME2) }}" >> $GITHUB_ENV
-      env:
-        DAPPPUBLICBUCKET: 'dappPublicBucket'
-        DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
-    - name: Use concatenated string dappPublicBucketDevname
-      run: echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
-
-
-  # fix formats of variables single stage
-    - name: dappPublicBucketDevname
-      if: ${{ env.MULTISTAGE == 'false' }}
-      run: echo "DAPPPUBLICBUCKET_NAME=${{ format('{0}{1}', env.DAPPPUBLICBUCKET, env.DEVNAME2) }}" >> $GITHUB_ENV
-      env:
-        DAPPPUBLICBUCKET: 'dappPublicBucket'
-        DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
-    - name: Use concatenated string dappPublicBucketDevname
-      run: echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
-
-  # fix formats of variables single stage
-    - name: dappPublicBucketDevname-single-stage
       if: ${{ env.MULTISTAGE == 'true' }}
+      run: echo "DAPPPUBLICBUCKET_NAME=${{ format('{0}{1}', env.DAPPPUBLICBUCKET, env.DEVNAME2) }}" >> $GITHUB_ENV
+      env:
+        DAPPPUBLICBUCKET: 'dappPublicBucket'
+        DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
+    - name: Use concatenated string dappPublicBucketDevname
+      run: echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
+
+
+  # Variables single stage dappPubBucket
+    - name: dappPubBucket-single-stage
+      if: ${{ env.MULTISTAGE == 'false' }}
       env: 
         DAPPPUBLICBUCKET_NAME: dappPubBucket
       run: |
-        echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
+        echo "The dappPublicBucket is $DAPPPUBLICBUCKET_NAME"
 
+  # Variables single stage dappPrivBucket
+    - name: dappPrivBucket-single-stage
+      if: ${{ env.MULTISTAGE == 'false' }}
+      env: 
+        DAPPPRIVATEBUCKET_NAME: dappPrivBucket
+      run: |
+        echo "The dappPrivBucket is $DAPPPRIVATEBUCKET_NAME"
+
+  # Variables single stage auth
+    - name: auth-single-stage
+      if: ${{ env.MULTISTAGE == 'false' }}
+      env: 
+        AUTH_NAME: auth
+      run: |
+        echo "The auth is $AUTH_NAME"
+
+  # Variables single stage auth
+    - name: dappSite-single-stage
+      if: ${{ env.MULTISTAGE == 'false' }}
+      env: 
+        CDNDAPP_NAME: dappSite
+      run: |
+        echo "The dappSite is $CDNDAPP_NAME"
+
+
+  # Variables single stage storeSite
+    - name: storeSite-single-stage
+      if: ${{ env.MULTISTAGE == 'false' }}
+      env: 
+        CDNSTORE_NAME: storeSite
+      run: |
+        echo "The dappSite is $CDNDAPP_NAME"
