@@ -44,10 +44,10 @@ jobs:
 
     # fix formats of variables auth-pulumistack
     - name: auth-pulumistack
-      run: echo "AUTH_NAME=${{ format('{0}-{1}', env.AUTH_ENV_NAME, env.NODE_ENV_NAME) }}" >> $GITHUB_ENV
+      run: echo "AUTH_NAME=${{ format('{0}{1}', env.AUTH_ENV_NAME, env.NODE_ENV_NAME) }}" >> $GITHUB_ENV
       env:
         AUTH_ENV_NAME: 'auth'
-        NODE_ENV_NAME: ${{ env.NODE_ENV }}
+        NODE_ENV_NAME: "-${{ env.NODE_ENV }}"
     - name: Use concatenated string auth-pulumistack
       run: echo "The auth-pulumistack is $AUTH_NAME"
 
@@ -79,7 +79,14 @@ jobs:
       run: echo "The cdnStoreDevname is $CDNVESTING_NAME"
 
 
-
+    # fix formats of variables cdnStakingDevname
+    - name: cdnStakingDevname
+      run: echo "CDNSTAKING_NAME=${{ format('{0}{1}', env.CDNSTAKING, env.DEVNAME2) }}" >> $GITHUB_ENV
+      env:
+        CDNSTAKING: 'cdnStaking'
+        DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
+    - name: Use concatenated string cdnStakingDevname
+      run: echo "The cdnStakingDevname is $CDNSTAKING_NAME"
 
   # fix formats of variables dappPrivateBucketDevname
     - name: dappPrivateBucketDevname
@@ -98,3 +105,4 @@ jobs:
         DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
     - name: Use concatenated string dappPublicBucketDevname
       run: echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
+
