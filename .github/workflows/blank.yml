@@ -5,6 +5,7 @@ on: [push]
 env:
   DEVNAME_SUFFIX: nunu
   NODE_ENV: devops
+  MULTISTAGE: true
 
 jobs:
   build:
@@ -35,6 +36,7 @@ jobs:
 
   # fix formats of variables apigw-devname
     - name: apigw-devname
+      if: ${{ env.MULTISTAGE == 'false' }}
       run: echo "APIGW_NAME=${{ format('{0}{1}', env.APIGW, env.DEVNAME) }}" >> $GITHUB_ENV
       env:
         APIGW: 'apigw'
@@ -77,7 +79,6 @@ jobs:
         DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
     - name: Use concatenated string cdnVestingDevname
       run: echo "The cdnStoreDevname is $CDNVESTING_NAME"
-
 
     # fix formats of variables cdnStakingDevname
     - name: cdnStakingDevname
