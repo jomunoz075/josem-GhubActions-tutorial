@@ -138,7 +138,8 @@ jobs:
   # fix formats of variables single stage
     - name: dappPublicBucketDevname-single-stage
       if: ${{ env.MULTISTAGE == 'true' }}
+      env: 
+        DAPPPUBLICBUCKET_NAME: dappPubBucket
       run: |
-        echo DAPPPUBLICBUCKET_NAME=dappPubBucket >> $GITHUB_ENV
         echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
 
