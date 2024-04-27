@@ -4,7 +4,7 @@ on: [push]
 
 env:
   DEVNAME_SUFFIX: nunu
-  UPPERCASE_VAR: "HELLO WORLD"
+  NODE_ENV: devops
 
 jobs:
   build:
@@ -42,8 +42,14 @@ jobs:
     - name: Use concatenated string
       run: echo "The apigw-devname is $APIGW_NAME"
 
-
-
+    # fix formats of variables auth-pulumistack
+    - name: auth-pulumistack
+      run: echo "AUTH_NAME=${{ format('{0}-{1}', env.APIGW, env.DEVNAME) }}" >> $GITHUB_ENV
+      env:
+        APIGW: 'auth'
+        DEVNAME: ${{ env.DEVNAME_SUFFIX }}
+    - name: Use concatenated string auth-pulumistack
+      run: echo "The auth-pulumistack is $AUTH_NAME"
 
   # fix formats of variables cdnDappDevname
     - name: cdnDappDevname
@@ -56,9 +62,9 @@ jobs:
 
   # fix formats of variables cdnStoreDevname
     - name: cdnStoreDevname
-      run: echo "CDNDAPP_NAME=${{ format('{0}{1}', env.CDNSTORE, env.DEVNAME2) }}" >> $GITHUB_ENV
+      run: echo "CDNSTORE_NAME=${{ format('{0}{1}', env.CDNSTORE, env.DEVNAME2) }}" >> $GITHUB_ENV
       env:
         CDNSTORE: 'cdnStore'
         DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
     - name: Use concatenated string cdnStoreDevname
-      run: echo "The cdnDappDevname is $CDNDAPP_NAME"
+      run: echo "The cdnStoreDevname is $CDNSTORE_NAME"
