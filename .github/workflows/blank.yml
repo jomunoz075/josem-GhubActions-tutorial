@@ -139,6 +139,6 @@ jobs:
     - name: dappPublicBucketDevname-single-stage
       if: ${{ env.MULTISTAGE == 'true' }}
       run: |
-        echo "DAPPPUBLICBUCKET_NAME=dappPubBucket" >> $GITHUB_ENV
+        echo DAPPPUBLICBUCKET_NAME=dappPubBucket >> $GITHUB_ENV
         echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
 
