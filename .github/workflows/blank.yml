@@ -35,10 +35,10 @@ jobs:
 
   # fix formats of variables apigw-devname
     - name: apigw-devname
-      run: echo "APIGW_NAME=${{ format('{0}-{1}', env.APIGW, env.DEVNAME) }}" >> $GITHUB_ENV
+      run: echo "APIGW_NAME=${{ format('{0}{1}', env.APIGW, env.DEVNAME) }}" >> $GITHUB_ENV
       env:
         APIGW: 'apigw'
-        DEVNAME: ${{ env.DEVNAME_SUFFIX }}
+        DEVNAME: "-${{ env.DEVNAME_SUFFIX }}"
     - name: Use concatenated string apigw-devname
       run: echo "The apigw-devname is $APIGW_NAME"
 
