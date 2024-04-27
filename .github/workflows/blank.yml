@@ -68,3 +68,33 @@ jobs:
         DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
     - name: Use concatenated string cdnStoreDevname
       run: echo "The cdnStoreDevname is $CDNSTORE_NAME"
+
+  # fix formats of variables cdnVestingDevname
+    - name: cdnVestingDevname
+      run: echo "CDNVESTING_NAME=${{ format('{0}{1}', env.CDNVESTING, env.DEVNAME2) }}" >> $GITHUB_ENV
+      env:
+        CDNVESTING: 'cdnVesting'
+        DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
+    - name: Use concatenated string cdnVestingDevname
+      run: echo "The cdnStoreDevname is $CDNVESTING_NAME"
+
+
+
+
+  # fix formats of variables dappPrivateBucketDevname
+    - name: dappPrivateBucketDevname
+      run: echo "DAPPPRIVATEBUCKET_NAME=${{ format('{0}{1}', env.DAPPPRIVATEBUCKET, env.DEVNAME2) }}" >> $GITHUB_ENV
+      env:
+        DAPPPRIVATEBUCKET: 'dappPrivateBucket'
+        DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
+    - name: Use concatenated string dappPrivateBucketDevname
+      run: echo "The dappPrivateBucketDevname is $DAPPPRIVATEBUCKET_NAME"
+
+  # fix formats of variables dappPublicBucketDevname
+    - name: dappPublicBucketDevname
+      run: echo "DAPPPUBLICBUCKET_NAME=${{ format('{0}{1}', env.DAPPPUBLICBUCKET, env.DEVNAME2) }}" >> $GITHUB_ENV
+      env:
+        DAPPPUBLICBUCKET: 'dappPublicBucket'
+        DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
+    - name: Use concatenated string dappPublicBucketDevname
+      run: echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
