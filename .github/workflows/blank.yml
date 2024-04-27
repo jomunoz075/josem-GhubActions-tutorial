@@ -5,7 +5,7 @@ on: [push]
 env:
   DEVNAME_SUFFIX: nunu
   NODE_ENV: devops
-  MULTISTAGE: true
+  MULTISTAGE: false
 
 jobs:
   build:
