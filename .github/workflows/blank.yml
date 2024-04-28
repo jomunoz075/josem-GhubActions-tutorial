@@ -129,7 +129,7 @@ jobs:
     - name: dappPubBucket-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
       env: 
-        DAPPPUBLICBUCKET_NAME: dappPubBucket
+        DAPPPUBLICBUCKET_NAME: dappPubBucket >> $GITHUB_ENV
       run: |
         echo "The dappPublicBucket is $DAPPPUBLICBUCKET_NAME"
 
@@ -137,7 +137,7 @@ jobs:
     - name: dappPrivBucket-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
       env: 
-        DAPPPRIVATEBUCKET_NAME: dappPrivBucket
+        DAPPPRIVATEBUCKET_NAME: dappPrivBucket >> $GITHUB_ENV
       run: |
         echo "The dappPrivBucket is $DAPPPRIVATEBUCKET_NAME"
 
@@ -145,7 +145,7 @@ jobs:
     - name: auth-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
       env: 
-        AUTH_NAME: auth
+        AUTH_NAME: auth >> $GITHUB_ENV
       run: |
         echo "The auth is $AUTH_NAME"
 
@@ -153,7 +153,7 @@ jobs:
     - name: dappSite-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
       env: 
-        CDNDAPP_NAME: dappSite
+        CDNDAPP_NAME: dappSite >> $GITHUB_ENV
       run: |
         echo "The dappSite is $CDNDAPP_NAME"
 
@@ -162,7 +162,7 @@ jobs:
     - name: storeSite-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
       env: 
-        CDNSTORE_NAME: storeSite
+        CDNSTORE_NAME: storeSite >> $GITHUB_ENV
       run: |
         echo "The dappSite is $CDNSTORE_NAME"
 
