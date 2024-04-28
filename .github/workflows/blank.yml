@@ -132,39 +132,48 @@ jobs:
       env:
         DAPPPUBLICBUCKET: 'dappPublicBucket'
         DEVNAME2: ''
-    - name: Use concatenated string dappPublicBucketDevname
+    - name: Use string dappPublicBucket
       run: echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
 
   # Variables single stage dappPrivBucket
     - name: dappPrivBucket-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
+      run: echo "DAPPPRIVATEBUCKET_NAME=${{ format('{0}{1}', env.DAPPPRIVATEBUCKET, env.DEVNAME2) }}" >> $GITHUB_ENV
       env: 
-        DAPPPRIVATEBUCKET_NAME: dappPrivBucket >> $GITHUB_ENV
-      run: |
-        echo "The dappPrivBucket is $DAPPPRIVATEBUCKET_NAME"
+        DAPPPRIVATEBUCKET_NAME: 'dappPrivBucket'
+        DEVNAME2: ''
+    - name: Use string dappPrivateBucket
+      run: echo "The dappPrivBucket is $DAPPPRIVATEBUCKET_NAME"
 
   # Variables single stage auth
     - name: auth-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
+      run: echo "AUTH_NAME=${{ format('{0}{1}', env.AUTH_ENV_NAME, env.NODE_ENV_NAME) }}" >> $GITHUB_ENV
       env: 
-        AUTH_NAME: auth >> $GITHUB_ENV
-      run: |
-        echo "The auth is $AUTH_NAME"
+        AUTH_NAME: 'auth'
+        NODE_ENV_NAME: ''
+    - name: Use string auth        
+      run: echo "The auth is $AUTH_NAME"
 
   # Variables single stage auth
     - name: dappSite-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
+      run: echo "CDNDAPP_NAME=${{ format('{0}{1}', env.CDNDAPP2, env.DEVNAME2) }}" >> $GITHUB_ENV
       env: 
-        CDNDAPP_NAME: dappSite >> $GITHUB_ENV
-      run: |
-        echo "The dappSite is $CDNDAPP_NAME"
+        CDNDAPP2: 'dappSite'
+        DEVNAME2: ''
+    - name: Use string cdnDapp
+      run: echo "The cdnDapp is $CDNDAPP_NAME"
 
 
   # Variables single stage storeSite
     - name: storeSite-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
+      run: echo "CDNSTORE_NAME=${{ format('{0}{1}', env.CDNSTORE, env.DEVNAME2) }}" >> $GITHUB_ENV
       env: 
-        CDNSTORE_NAME: storeSite >> $GITHUB_ENV
+        CDNSTORE: 'storeSite'
+        DEVNAME2: ''
+    - name: Use string storeSite
       run: |
         echo "The dappSite is $CDNSTORE_NAME"
 
