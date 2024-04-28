@@ -82,7 +82,7 @@ jobs:
         CDNVESTING: 'cdnVesting'
         DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
     - name: Use concatenated string cdnVestingDevname
-      run: echo "The cdnStoreDevname is $CDNVESTING_NAME"
+      run: echo "The cdnVestingDevname is $CDNVESTING_NAME"
 
     # fix formats of variables cdnStakingDevname
     - name: cdnStakingDevname
@@ -102,7 +102,7 @@ jobs:
         CDNADMIN: 'cdnAdmin'
         DEVNAME2: ${{ env.DEVNAME_SUFFIX_CAPITALIZED }}
     - name: Use concatenated string cdnStakingDevname
-      run: echo "The cdnStakingDevname is $CDNSTAKING_NAME"
+      run: echo "The cdnStakingDevname is $CDNADMIN_NAME"
 
   # fix formats of variables dappPrivateBucketDevname
     - name: dappPrivateBucketDevname
@@ -124,13 +124,14 @@ jobs:
     - name: Use concatenated string dappPublicBucketDevname
       run: echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
 
+###################################  SINGLE STAGE  ##################################################
 
   # Variables single stage dappPubBucket
     - name: dappPubBucket-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
       run: echo "DAPPPUBLICBUCKET_NAME=${{ format('{0}{1}', env.DAPPPUBLICBUCKET, env.DEVNAME2) }}" >> $GITHUB_ENV
       env:
-        DAPPPUBLICBUCKET: 'dappPublicBucket'
+        DAPPPUBLICBUCKET: 'dappPubBucket'
         DEVNAME2: ''
     - name: Use string dappPublicBucket
       run: echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
@@ -140,7 +141,7 @@ jobs:
       if: ${{ env.MULTISTAGE == 'false' }}
       run: echo "DAPPPRIVATEBUCKET_NAME=${{ format('{0}{1}', env.DAPPPRIVATEBUCKET, env.DEVNAME2) }}" >> $GITHUB_ENV
       env: 
-        DAPPPRIVATEBUCKET_NAME: 'dappPrivBucket'
+        DAPPPRIVATEBUCKET: 'dappPrivBucket'
         DEVNAME2: ''
     - name: Use string dappPrivateBucket
       run: echo "The dappPrivBucket is $DAPPPRIVATEBUCKET_NAME"
@@ -148,9 +149,9 @@ jobs:
   # Variables single stage auth
     - name: auth-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
-      run: echo "AUTH_NAME=${{ format('{0}{1}', env.AUTH_ENV_NAME, env.NODE_ENV_NAME) }}" >> $GITHUB_ENV
+      run: echo "AUTH_NAME=${{ format('{0}{1}', env.AUTH, env.NODE_ENV_NAME) }}" >> $GITHUB_ENV
       env: 
-        AUTH_NAME: 'auth'
+        AUTH: 'auth'
         NODE_ENV_NAME: ''
     - name: Use string auth        
       run: echo "The auth is $AUTH_NAME"
@@ -177,7 +178,38 @@ jobs:
       run: |
         echo "The dappSite is $CDNSTORE_NAME"
 
-  # Variables single stage vesting
+####
+  # fix formats of variables cdnVestingDevname
+    - name: cdnVesting
+      if: ${{ env.MULTISTAGE == 'false' }}
+      run: echo "CDNVESTING_NAME=${{ format('{0}{1}', env.CDNVESTING, env.DEVNAME2) }}" >> $GITHUB_ENV
+      env:
+        CDNVESTING: 'vestingSite'
+        DEVNAME2: ''
+    - name: Use  string cdnVesting
+      run: echo "The cdnVesting is $CDNVESTING_NAME"
+
+  # fix formats of variables cdnStakingDevname
+    - name: cdnStaking
+      if: ${{ env.MULTISTAGE == 'false' }}
+      run: echo "CDNSTAKING_NAME=${{ format('{0}{1}', env.CDNSTAKING, env.DEVNAME2) }}" >> $GITHUB_ENV
+      env:
+        CDNSTAKING: 'stakingSite'
+        DEVNAME2: ''
+    - name: Use string cdnStaking
+      run: echo "The cdnStaking is $CDNSTAKING_NAME"
+
+# fix formats of variables cdnAdminDevname
+    - name: cdnAdmin
+      if: ${{ env.MULTISTAGE == 'false' }}
+      run: echo "CDNADMIN_NAME=${{ format('{0}{1}', env.CDNADMIN, env.DEVNAME2) }}" >> $GITHUB_ENV
+      env:
+        CDNADMIN: 'adminSite'
+        DEVNAME2: ''
+    - name: Use string cdnAdmin
+      run: echo "The cdnAdmin is $CDNADMIN_NAME"
+
+  # fix formats of variables single stage
     - name: all-single-stage
       run: |
         echo "The dapppublicbucket is ${{ env.DAPPPUBLICBUCKET_NAME }}"
