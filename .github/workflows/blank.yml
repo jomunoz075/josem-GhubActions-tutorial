@@ -128,11 +128,12 @@ jobs:
   # Variables single stage dappPubBucket
     - name: dappPubBucket-single-stage
       if: ${{ env.MULTISTAGE == 'false' }}
-      run: echo "DAPPPUBLICBUCKET_NAME=${{ format('{0}', env.DAPPPUBLICBUCKET) }}" >> $GITHUB_ENV
-      env: 
-        DAPPPUBLICBUCKET_NAME: dappPubBucket >> $GITHUB_ENV
+      run: echo "DAPPPUBLICBUCKET_NAME=${{ format('{0}{1}', env.DAPPPUBLICBUCKET, env.DEVNAME2) }}" >> $GITHUB_ENV
+      env:
+        DAPPPUBLICBUCKET: 'dappPublicBucket'
+        DEVNAME2: ''
     - name: Use concatenated string dappPublicBucketDevname
-      run: echo "The dappPublicBucket is $DAPPPUBLICBUCKET_NAME"
+      run: echo "The dappPublicBucketDevname is $DAPPPUBLICBUCKET_NAME"
 
   # Variables single stage dappPrivBucket
     - name: dappPrivBucket-single-stage
