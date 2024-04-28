@@ -168,7 +168,6 @@ jobs:
 
   # Variables single stage vesting
     - name: all-single-stage
-      if: ${{ env.MULTISTAGE == 'false' }}
       run: |
         echo "The dapppublicbucket is ${{ env.DAPPPUBLICBUCKET_NAME }}"
         echo "The dappPrivBucket is ${{ env.DAPPPRIVATEBUCKET_NAME }}"  
