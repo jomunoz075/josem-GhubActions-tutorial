@@ -171,7 +171,7 @@ jobs:
       if: ${{ env.MULTISTAGE == 'false' }}
       run: |
         echo "The dapppublicbucket is ${{ env.DAPPPUBLICBUCKET_NAME }}"
-        echo "The dappPrivBucket is ${{ env.DAPPPRIVATEBUCKET_NAME }}        
+        echo "The dappPrivBucket is ${{ env.DAPPPRIVATEBUCKET_NAME }}"  
         echo "The auth is ${{ env.AUTH_NAME }}"
         echo "The dappSite is ${{ env.CDNDAPP_NAME }}"
         echo "The storeSite is ${{ env.CDNSTORE_NAME }}"
